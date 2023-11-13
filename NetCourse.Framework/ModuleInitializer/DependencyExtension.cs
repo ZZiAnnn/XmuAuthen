@@ -1,4 +1,4 @@
-﻿using Framework;
+﻿using NetCourse.Framework.ModuleInitializer;
 using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
