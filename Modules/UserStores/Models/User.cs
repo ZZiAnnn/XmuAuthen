@@ -9,6 +9,8 @@ namespace UserStores.Models
         public string Password { get; set; } = string.Empty;
         public string Realname {  get; set; } = string.Empty;
         public string Avatar { get; set; } = string.Empty;
+        public string StudentNo {  get; set; } = string.Empty;
+        public string LastLoginTime { get; set; } = string.Empty;
         #endregion
 
         #region Constructors
