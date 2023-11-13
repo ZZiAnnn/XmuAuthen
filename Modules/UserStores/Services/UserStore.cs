@@ -11,9 +11,17 @@ namespace UserStores.Services
 
         public UserStore()
         {
-            string json = string.Empty;
-            json = File.ReadAllText(path);
-            UserList = JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
+            try
+            {
+                string json = string.Empty;
+                json = File.ReadAllText(path);
+                UserList = JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
+            }
+            catch
+            {
+
+            }
+
         }
 
         public (bool success, string msg, IUserPrincipal? user) AddUser(string name, string pwd)
