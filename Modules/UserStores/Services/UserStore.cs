@@ -6,7 +6,7 @@ namespace UserStores.Services
 {
     public class UserStore : IUserStore
     {
-        private const string path = "./users.json";
+        private const string path = "./users.txt";
         public List<User> UserList { get; set; } = new List<User>();
 
         public UserStore()
