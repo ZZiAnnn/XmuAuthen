@@ -11,21 +11,9 @@ namespace UserStores.Services
 
         public UserStore()
         {
-            LoadUsers();
-        }
-
-        public void LoadUsers()
-        {
             string json = string.Empty;
-            try
-            {
-                json = File.ReadAllText(path);
-                UserList = JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
-            }
-            catch
-            {
-
-            }
+            json = File.ReadAllText(path);
+            UserList = JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
         }
 
         public (bool success, string msg, IUserPrincipal? user) AddUser(string name, string pwd)
@@ -34,7 +22,7 @@ namespace UserStores.Services
 
             if (UserList.Any(e => e.UserName == name))
             {
-                return (false, $"已经存在用户名为{name}的用户", null);
+                return (false, $"用户名{name}重复！", null);
             }
 
             var user = new User
