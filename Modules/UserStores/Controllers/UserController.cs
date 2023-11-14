@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using NetCourse.Framework.Security;
 namespace UserStores.Controllers
 {
@@ -22,6 +23,18 @@ namespace UserStores.Controllers
                 msg,
                 data = user
             });
+        }
+
+        public ActionResult RemoveUser()
+        {   
+            string Id= Request.Query[nameof(userId)].ToString();
+            var(success,msg,Id)=user
+            return Ok(new
+            {
+                success,
+                msg,
+                data = Id
+            }); 
         }
     }
 }
