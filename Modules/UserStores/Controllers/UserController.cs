@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using NetCourse.Framework.Security;
+using UserStores.Models;
+
 namespace UserStores.Controllers
 {
     [Route("/api/user/{action}")]
@@ -12,11 +14,10 @@ namespace UserStores.Controllers
             this.userStore = userStore;
         }
 
-        public ActionResult AddUser()
+        [HttpPut]
+        public ActionResult AddUser([FromBody] User u)
         {
-            string name = Request.Query[nameof(name)].ToString();
-            string pwd = Request.Query[nameof(pwd)].ToString();
-            var (success, msg, user) = userStore.AddUser(name, pwd);
+            var (success, msg, user) = userStore.AddUser(u.UserName,u.Password,u.StudentNo);
             return Ok(new
             {
                 success,
@@ -25,16 +26,31 @@ namespace UserStores.Controllers
             });
         }
 
-        public ActionResult RemoveUser()
-        {   
-            string Id= Request.Query[nameof(userId)].ToString();
-            var(success,msg,Id)=user
+        [HttpGet]
+        public ActionResult GetUser()
+        {
+            string name = Request.Query[nameof(name)].ToString();
+            string pwd = Request.Query[nameof(pwd)].ToString();
+            var (success, msg, user) = userStore.GetUser(name, pwd);
             return Ok(new
             {
                 success,
                 msg,
-                data = Id
-            }); 
+                data = user
+            });
+        }
+
+        [HttpDelete]
+        public ActionResult RemoveUser()
+        {
+            string name = Request.Query[nameof(name)].ToString();
+            var (success, msg, user) = userStore.RemoveUser(name);
+            return Ok(new
+            {
+                success,
+                msg,
+                data = user
+            });
         }
     }
 }
