@@ -23,26 +23,21 @@ namespace UserStores.Services
 
         public bool IsPasswordValid(string password)
         {
-            if (password.Length < 6 || password.Length > 16)
-            {
+            if (password.Length < 6 || password.Length > 16){
                 return false;
             }
 
             int count = 0;
-            if (password.Any(char.IsUpper))
-            {
+            if (password.Any(char.IsUpper)){
                 count++;
             }
-            if (password.Any(char.IsLower))
-            {
+            if (password.Any(char.IsLower)){
                 count++;
             }
-            if (password.Any(char.IsDigit))
-            {
+            if (password.Any(char.IsDigit)){
                 count++;
             }
-            if (password.Any(c => !char.IsLetterOrDigit(c)))
-            {
+            if (password.Any(c => !char.IsLetterOrDigit(c))){
                 count++;
             }
 
@@ -71,6 +66,11 @@ namespace UserStores.Services
                 return (false, $"已经存在用户名为{name}的用户", null);
             }
 
+            if (UserList.Any(e => e.StudentNo == number))
+            {
+                return (false, $"已经存在学号为{number}的用户", null);
+            }
+
             var user = new User
             {
                 ID = Guid.NewGuid(),
@@ -95,17 +95,17 @@ namespace UserStores.Services
             return (true, string.Empty, user);
         }
 
-        public (bool success, string msg, IUserPrincipal? user) RemoveUser(string userName)
+        public (bool success, string msg, Guid? id) RemoveUser(string userName)
         {
             var user = UserList.FirstOrDefault(e => e.UserName == userName);
             if (user == null)
             {
-                return (false, "用户不存在", user);
+                return (false, "用户不存在", null);
             }
 
             UserList.Remove(user);
             SaveUser();
-            return (true, string.Empty, user);
+            return (true, string.Empty, user.ID);
         }
 
         private void SaveUser()

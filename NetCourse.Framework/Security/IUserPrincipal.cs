@@ -4,7 +4,7 @@
     {
         #region 字段
         Guid ID { get; set; }
-        string Realname { get; set; }
+        string UserName { get; set; }
         string StudentNo { get; set; }
         string Avatar {  get; set; }
         #endregion

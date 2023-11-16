@@ -27,11 +27,9 @@ namespace UserStores.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetUser()
+        public ActionResult GetUser([FromBody] User u)
         {
-            string name = Request.Query[nameof(name)].ToString();
-            string pwd = Request.Query[nameof(pwd)].ToString();
-            var (success, msg, user) = userStore.GetUser(name, pwd);
+            var (success, msg, user) = userStore.GetUser(u.UserName, u.Password);
             return Ok(new
             {
                 success,
@@ -44,12 +42,12 @@ namespace UserStores.Controllers
         public ActionResult RemoveUser()
         {
             string name = Request.Query[nameof(name)].ToString();
-            var (success, msg, user) = userStore.RemoveUser(name);
+            var (success, msg, id) = userStore.RemoveUser(name);
             return Ok(new
             {
                 success,
                 msg,
-                data = user
+                data = id
             });
         }
     }
