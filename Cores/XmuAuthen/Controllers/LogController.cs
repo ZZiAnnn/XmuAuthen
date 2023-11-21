@@ -11,15 +11,17 @@ namespace UserStores.Controllers
     [Route("/api/{action}")]
     public class LogController : Controller
     {
+        public record LoginForm(string username,string password);
         private AuthenService authenService;
         public LogController(AuthenService authenService) 
         {
             this.authenService = authenService; 
         }
+
         [HttpPost]
-        public ActionResult Login([FromBody]LogUser lu)
+        public ActionResult Login([FromBody]LoginForm form)
         {
-            var token=authenService.SignOn(lu.username,lu.password);
+            var token=authenService.SignOn(form.username,form.password);
             if(token==null)
             {
                 return Ok(new
