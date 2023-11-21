@@ -1,4 +1,5 @@
 ﻿global using Microsoft.Extensions.DependencyInjection;
+global using Ricebird.Framework;
 
 namespace NetCourse.Framework
 {

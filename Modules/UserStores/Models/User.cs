@@ -1,7 +1,8 @@
-﻿using NetCourse.Framework.Security;
+﻿using NetCourse.Framework.Database;
+using NetCourse.Framework.Security;
 namespace UserStores.Models
 {
-    public class User : IUserPrincipal
+    public class User :EntityBase,IUserPrincipal
     {
         #region Fields
         public Guid ID { get; set; } = Guid.NewGuid();

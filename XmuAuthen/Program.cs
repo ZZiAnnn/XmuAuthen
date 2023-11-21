@@ -1,15 +1,14 @@
 var builder = WebApplication.CreateBuilder(args);
-// 测试加个注释
+
 // Add services to the container. 
 // builder.Services.AddRazorPages();
 
+builder.Services.LoadAssembly("XmuAuthen");
 builder.Services.LoadAssembly("UserStores");
-
 builder.Services.ScanAllDependency();
-
 builder.Services.AddMvc();
-
 builder.Services.AddControllers();
+builder.Services.AddSqliteDatabase(@"./myDb.db", "DotNetExp");//启动项目的名称
 
 
 var app = builder.Build();

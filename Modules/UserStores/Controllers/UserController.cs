@@ -29,11 +29,11 @@ namespace UserStores.Controllers
         [HttpGet]
         public ActionResult GetUser([FromBody] User u)
         {
-            var (success, msg, user) = userStore.GetUser(u.UserName, u.Password);
-            return Ok(new
+            var user= userStore.GetUser(u.UserName, u.Password);
+            return Ok(new 
             {
-                success,
-                msg,
+                success="success",
+                msg="",
                 data = user
             });
         }
@@ -51,4 +51,5 @@ namespace UserStores.Controllers
             });
         }
     }
+
 }

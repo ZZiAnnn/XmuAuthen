@@ -85,15 +85,17 @@ namespace UserStores.Services
             return (true, string.Empty, user);
         }
 
-        public (bool success, string msg, IUserPrincipal? user) GetUser(string userName, string pwd)
-        {
-            var user = UserList.FirstOrDefault(e => e.UserName == userName && e.Password == pwd);
-            if (user == null)
-            {
-                return (false, "用户不存在", user);
-            }
-            return (true, string.Empty, user);
-        }
+        public IUserPrincipal? GetUser(string userName,string pwd)
+            => UserList.FirstOrDefault(e => e.UserName == userName && e.Password == pwd);
+        //public (bool success, string msg, IUserPrincipal? user) GetUser(string userName, string pwd)
+        //{
+        //    var user = UserList.FirstOrDefault(e => e.UserName == userName && e.Password == pwd);
+        //    if (user == null)
+        //    {
+        //        return (false, "用户名或密码错误", user);
+        //    }
+        //    return (true, string.Empty, user);
+        //}
 
         public (bool success, string msg, Guid? id) RemoveUser(string userName)
         {

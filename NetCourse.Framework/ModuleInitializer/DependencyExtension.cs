@@ -1,4 +1,5 @@
-﻿using NetCourse.Framework.ModuleInitializer;
+﻿using NetCourse.Framework;
+using NetCourse.Framework.ModuleInitializer;
 using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -10,10 +11,15 @@ namespace Microsoft.Extensions.DependencyInjection
             Assembly.Load(assemblyName);
         }
 
-        public static void ScanAllDependency(this IServiceCollection collection)
+        public static HostEnv ScanAllDependency(this IServiceCollection collection)
         {
-            ModuleInitializer initializer = new ModuleInitializer(collection);
+            HostEnv env = new HostEnv();
+            collection.AddSingleton(env);
+
+            ModuleInitializer initializer = new ModuleInitializer(collection, env);
             initializer.InitializeAssembly();
+
+            return env;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace NetCourse.Framework.ModuleInitializer
+﻿using NetCourse.Framework.Database;
+using System.Reflection;
+
+namespace NetCourse.Framework.ModuleInitializer
 {
     internal class ModuleInitializer
     {
@@ -7,9 +10,12 @@
             get; set;
         }
 
-        internal ModuleInitializer(IServiceCollection collection)
+        private HostEnv HostEnv { get; init; }
+
+        internal ModuleInitializer(IServiceCollection collection, HostEnv env)
         {
             Collection = collection;
+            HostEnv = env;
         }
 
         /// <summary>
@@ -33,6 +39,11 @@
             {
                 if (typeof(IDependency).IsAssignableFrom(type))
                 {
+                    if (typeof(EntityBase).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract)
+                    {
+                        HostEnv.AllEntities.Add(type);
+                    }
+
                     transient.Add(type);
                 }
                 else if (typeof(ISingletonDependency).IsAssignableFrom(type))

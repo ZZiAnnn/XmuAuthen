@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmuAuthor", "Cores\XmuAutho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserStores", "Modules\UserStores\UserStores.csproj", "{C93D57CA-D9BA-4EFC-9F9F-98FA16242667}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = ".Netexp", "XmuAuthen\.Netexp.csproj", "{9D87C5B6-94DF-4231-9FB2-B271665C82C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetExp", "XmuAuthen\DotNetExp.csproj", "{9D87C5B6-94DF-4231-9FB2-B271665C82C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
