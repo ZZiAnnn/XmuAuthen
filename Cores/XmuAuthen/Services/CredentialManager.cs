@@ -2,13 +2,38 @@
 using NetCourse.Framework;
 using NetCourse.Framework.Security;
 using XmuAuthen.Models;
+using System.Timers;
 
 namespace XmuAuthen.Services
 {
     public class CredentialManager:ISingletonDependency
     {
         protected Dictionary<string, Certification> Cache { get; set; }=new Dictionary<string, Certification>();
+        private System.Timers.Timer timer;
+        public CredentialManager()
+        {
+            timer = new System.Timers.Timer(300000); // 设置时间间隔为5分钟
+            timer.Elapsed += TimerElapsed;
+            timer.Start();
+        }
 
+        private void TimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            var keysToRemove = new List<string>();
+            foreach (var pair in Cache)
+            {
+                if (pair.Value.ExpiredOn <= DateTime.Now)
+                {
+                    keysToRemove.Add(pair.Key);
+                }
+            }
+
+            foreach (var key in keysToRemove)
+            {
+                Cache.Remove(key);
+            }
+        }
+        
         string GetRandomKey()
         {
             string dict = "abcdefghijklmnopqrstuvwxyz1234567890";
