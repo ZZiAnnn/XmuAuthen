@@ -4,7 +4,7 @@ using NetCourse.Framework.Security;
 using UserStores.Models;
 namespace UserStores.Services
 {
-    public class UserStore : IUserStore
+    public class UserStore
     {
         private const string path = "./userlist.json";
         public List<User> UserList { get; set; } = new List<User>();
