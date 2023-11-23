@@ -39,7 +39,7 @@ namespace UserStores.Controllers
             });
         }
 
-        [HttpPost]
+        [HttpDelete]
         public ActionResult Logout([FromHeader] string token)
         {
             var msg=authenService.SignOff(token);
