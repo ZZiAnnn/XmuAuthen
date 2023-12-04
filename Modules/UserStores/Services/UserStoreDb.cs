@@ -96,6 +96,17 @@ namespace UserStores.Services
             return query?.FirstOrDefault();
         }
 
+        //获取一页用户
+        public List<IUserPrincipal?> GetUsers(int page, int size, string name = "", Guid? id = null)
+        {
+            using var scope = provider.CreateScope();
+            var repo = scope.ServiceProvider.GetRequiredService<NetContext>();
+            var query = from u in repo.Set<User>()
+                        where u.UserName.Contains(name) && (id == null || u.ID == id)
+                        select u;
+            return query.Skip((page - 1) * size).Take(size).Cast<IUserPrincipal?>().ToList();
+        }
+
         public (bool success, string msg, Guid? id) RemoveUser(string userName)
         {
             User user = new User()

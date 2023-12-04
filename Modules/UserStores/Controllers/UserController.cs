@@ -38,6 +38,17 @@ namespace UserStores.Controllers
             });
         }
 
+        [HttpGet]
+        public ActionResult GetUsers([FromBody] UserSearcher us){
+            var users = userStore.GetUsers(us.Page,us.Size,us.UserName,us.Id);
+            return Ok(new
+            {
+                success = "success",
+                msg = "",
+                data = users
+            });
+        }
+
         [HttpDelete]
         public ActionResult RemoveUser()
         {

@@ -12,6 +12,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmuAuthen", "Cores\XmuAuthen\XmuAuthen.csproj", "{2DA0FAFB-45B2-4580-BB1A-2915BE0EBEEE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmuAuthor", "Cores\XmuAuthor\XmuAuthor.csproj", "{668428F8-AC33-41EF-BA3E-3578A54780C9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{85DDE83C-8D94-453B-A971-273CF866E7ED} = {85DDE83C-8D94-453B-A971-273CF866E7ED}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserStores", "Modules\UserStores\UserStores.csproj", "{C93D57CA-D9BA-4EFC-9F9F-98FA16242667}"
 EndProject
