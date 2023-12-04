@@ -82,7 +82,7 @@ namespace UserStores.Services
 
             repo.Add(u);
             repo.SaveChanges();
-            return (true, "s", u);
+            return (true, "添加成功", u);
 
         }
 
